@@ -141,18 +141,7 @@ def process_prosper_excel(input_excel_file, output_excel_file):
       col3 = str(row_values[2])
       col4 = str(row_values[3])
       col5 = str(row_values[4])
-      noa = ""
-      for i, row in colum_values:
-        noa = row.values.data.obj[0]
-        if noa is not None and not math.isnan(noa):
-            print(int(noa))
-        else:
-            print("Valor inválido para conversão em inteiro")
-
-        noa = 0 if math.isnan(noa) else int(noa)
-
-        bloco = noa
-        print(noa)
+        
       for word in row_values:
         # print(word)
         if colunas_excel[0].startswith('Sala') and colunas_excel[1] == "Leitura Anterior" or colunas_excel[1] == "Leitura Ant." or colunas_excel[1] == "Leitura - Ant.":
