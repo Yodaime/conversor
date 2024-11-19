@@ -106,6 +106,7 @@ def process_prosper_excel(input_excel_file, output_excel_file):
     df = pd.read_excel(input_excel_file, skiprows=header_row + 1)
 
     colunas_excel = df.columns.tolist()
+    bl =""
 
     colum_values = pd.read_excel(input_excel_file)
     colum_values = colum_values.iterrows()
@@ -121,9 +122,8 @@ def process_prosper_excel(input_excel_file, output_excel_file):
     # Filtrar o DataFrame a partir da linha identificada
     df_filtered = df.iloc[start_row:].copy() if start_row is not None else df
     df_filtered = df_filtered[~df_filtered.apply(lambda row: row.astype(str).str.contains("TOTAL").any(), axis=1)]
-   
-      # print(df_filtered.values.tolist()[0:-1])
-   
+  
+
     headers = [
         ["BLOCO", "", "UNIDADE", "", "", "AMBIENTE", "", "MEDIDOR"],
         ["Nome", "Tipo", "Nome", "Matrícula", "Fração Ideal", "Sigla", "Nome Completo", "Num Rádio", "Num. INMETRO", "Fluido", "Modelo"]
@@ -158,8 +158,9 @@ def process_prosper_excel(input_excel_file, output_excel_file):
             ambiente = col1.replace('.', '').replace('0', '')
             unidade = "Unidade"
             bloco = "1"
+            if any(word.startswith("TOTAL") for word in words):
+              break
             
-
         if sigla == '':
           sigla = "Água Fria"
 
